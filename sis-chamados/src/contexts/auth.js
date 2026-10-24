@@ -105,7 +105,7 @@ await createUserWithEmailAndPassword(auth,email,password)
 
 return(
     <AuthContext.Provider 
-    value={{signed: !!user, user, signIn, signUp, logout, loadingAuth, loading}}>
+    value={{signed: !!user, user, signIn, signUp, logout, loadingAuth, loading, storageUser, setUser}}>
 {children}
     </AuthContext.Provider>
 )

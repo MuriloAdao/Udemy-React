@@ -1,0 +1,136 @@
+
+.hero {
+  width: 100%;
+  min-height: 340px;
+  padding: 20px 4% 0;
+
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  align-items: center;
+  gap: 35px;
+
+  background-color: #120b08;
+  color: #f2eae2;
+}
+
+.hero-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-welcome {
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #d8c5b2;
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-family: monospace;
+  font-size: clamp(24px, 3.5vw, 34px);
+  line-height: 1.65;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+}
+
+.hero-content p {
+  max-width: 390px;
+  color: #c5ad96;
+  font-family: monospace;
+  font-size: 10px;
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+
+.hero-explore {
+  background-color: #d9954e;
+  color: #1b1009;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 19px;
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.hero-explore:hover {
+  background-color: #f0b66f;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 285px;
+  justify-self: end;
+  overflow: hidden;
+  border-radius: 16px 16px 0 16px;
+}
+
+.hero-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.hero-dots {
+  display: flex;
+  gap: 5px;
+  position: absolute;
+  right: 5px;
+  bottom: -35px;
+}
+
+.hero-dots a {
+  width: 5px;
+  height: 5px;
+  background-color: #d9954e;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+@media (min-width: 1000px) {
+  .hero {
+    padding-left: 4%;
+    padding-right: 4%;
+    min-height: 400px;
+  }
+
+  .hero-image {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 35px 6%;
+  }
+
+  .hero h1 {
+    font-size: clamp(22px, 6vw, 32px);
+    line-height: 1.5;
+  }
+
+  .hero-content p {
+    max-width: 100%;
+    font-size: 11px;
+  }
+
+  .hero-image {
+    max-width: 100%;
+    width: 100%;
+    justify-self: center;
+    border-radius: 12px;
+  }
+
+  .hero-dots {
+    bottom: -20px;
+  }
+}

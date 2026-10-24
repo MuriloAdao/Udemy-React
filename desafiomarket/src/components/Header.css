@@ -1,0 +1,125 @@
+
+.header {
+  width: 100%;
+  padding: 20px 3%;
+  background-color: #160d0a;
+  border-bottom: 1px solid #38251b;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.logo {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: 2px;
+  flex-shrink: 0;
+}
+
+.logo span {
+  color: #d99a54;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.navigation a {
+  color: #c9bdb4;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+  position: relative;
+  padding-bottom: 8px;
+}
+.navigation a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #d99a54;
+  transition: width 0.3s;
+}
+
+.navigation a:hover, .navigation a.active {
+  color: #d99a54;
+}
+
+.navigation a:hover::after,
+.navigation a.active::after {
+  width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.search-button,
+.wallet-button {
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 13px;
+  white-space: nowrap;
+  flex-shrink: 1;
+}
+
+.search-button {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #594033;
+}
+
+.wallet-button {
+  background-color: #d99a54;
+  color: #160d0a;
+  border: none;
+  white-space: nowrap;
+  padding: 10px 12px;
+}
+
+.wallet-button:hover {
+  background-color: #efb875;
+}
+
+@media (max-width: 850px) {
+  .header {
+    flex-wrap: wrap;
+  }
+
+  .navigation {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .header-actions {
+    margin-left: auto;
+  }
+}
+
+header nav a {
+  text-decoration: none;
+}
+
+header nav a.active {
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+
+.mercado-link {
+  cursor: not-allowed;
+}

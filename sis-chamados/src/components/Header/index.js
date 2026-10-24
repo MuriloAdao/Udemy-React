@@ -7,7 +7,7 @@ import './header.css'
 
 
 export default function Header(){
-    const {user} = useContext(AuthContext)
+    const {user, setImageAvatar} = useContext(AuthContext)
     return(
         <div className="sidebar">
 
@@ -18,7 +18,7 @@ export default function Header(){
             <FiHome color="#FFF" size={24}/>
             Chamados
             </Link>
-             <Link to="/custumers">
+             <Link to="/customers">
             <FiUser color="#FFF" size={24}/>
             Clientes
             </Link>

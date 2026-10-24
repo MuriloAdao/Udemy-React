@@ -1,0 +1,63 @@
+
+.nft-card {
+  background-color: #211b18;
+  border: 1px solid #3a302b;
+  border-radius: 14px;
+  overflow: hidden;
+  color: #fff;
+  transition: transform 0.2s ease;
+}
+
+.nft-card:hover {
+  transform: translateY(-5px);
+}
+
+.nft-card-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.nft-card-info {
+  padding: 16px;
+}
+
+.nft-card-collection {
+  color: #b8a79b;
+  font-size: 12px;
+}
+
+.nft-card-info h3 {
+  margin: 8px 0 16px;
+  font-size: 18px;
+}
+
+.nft-card-prices {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.nft-card-prices span:first-child {
+  color: #d6b47a;
+  font-weight: bold;
+}
+
+.nft-card-token {
+  display: block;
+  margin-top: 12px;
+  color: #a99b91;
+  font-size: 12px;
+}
+
+.nft-card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.nft-card-link .nft-card {
+  height: 100%;
+}

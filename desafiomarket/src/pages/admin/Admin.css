@@ -1,0 +1,67 @@
+
+.admin-page {
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 24px;
+  color: #f3e8dd;
+}
+
+.admin-page h1 {
+  margin-bottom: 8px;
+  font-size: 28px;
+}
+
+.admin-page > p {
+  margin-bottom: 24px;
+  color: #aa9584;
+}
+
+.admin-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  padding: 24px;
+  border: 1px solid #3b2920;
+  border-radius: 12px;
+  background: #1c120e;
+}
+
+.admin-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.admin-form input,
+.admin-form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #594234;
+  border-radius: 7px;
+  background: #120c09;
+  color: #f3e8dd;
+}
+
+.admin-form button {
+  grid-column: 1 / -1;
+  padding: 13px;
+  border: 0;
+  border-radius: 7px;
+  background: #d99a55;
+  color: #1c120e;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-form button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+@media (max-width: 600px) {
+  .admin-form {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+}
