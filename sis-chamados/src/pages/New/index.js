@@ -3,19 +3,84 @@ import Title from "../../components/Title"
 import { FiPlusCircle } from "react-icons/fi"
 import './new.css'
 
-import { useState } from "react"
-
+import { useState, useEffect, useContext } from "react"
+import { AuthContext } from "../../contexts/auth"
+import { db } from "../../services/firebaseConnection"
+import {collection, getDocs, getDoc, doc, addDoc} from 'firebase/firestore'
+import { toast } from "react-toastify"
+const listRef = collection(db, "customers");
 
 export default function New(){
- const [costumers, setCostumers]= useState('')
+    const {user} = useContext(AuthContext);
+ const [customers, setCustomers]= useState('')
  const [complemento, setComplemento] = useState('')
  const [assunto, setAssunto] = useState('Suporte')
  const [status, setStatus] = useState('Aberto')
+ const [loadCustomer, setLoadCustomer] = useState(true);
+const [customersSelected, setCustomersSelected]= useState(0);
+useEffect(()=>{
+async function loadCustomer(){
+    const querySnapshot = await getDocs(listRef)
+    .then((snapshot)=>{
+        let lista=[];
+        snapshot.forEach((doc)=>{
+            lista.push({
+                id:doc.id,
+                nomeEmpresa: doc.data().nomeEmpresa
+            })
+        })
+
+        if(snapshot.docs.size === 0){
+            console.log("Nenhuma empresa encontrada");
+            setCustomers([{id: '1', nomeEmpresa:'Frela'}]);
+            setLoadCustomer(false);
+            return;
+        }
+
+        setCustomers(lista);
+        setLoadCustomer(false);
+    })
+    .catch((error) =>{
+        console.log("Erro ao buscar os Clientes")
+        setLoadCustomer(false);
+        setCustomers([{id: '1', nomeEmpresa: 'Frela'}])
+    })
+}
+loadCustomer();
+},[])
 
  function handleOptionChange(e){
     setStatus(e.target.value);
  }
 
+ function handleChangeSelect(e){
+    setAssunto(e.target.value);
+ }
+ function handleChangeCustomer(e){
+    setCustomersSelected(e.target.value);
+ }
+async function handleRegister(e){
+    e.preventDefault();
+
+    await addDoc(collection(db, "chamados"),{
+        created:new Date(),
+        cliente:customers[customersSelected].nomeEmpresa,
+        clienteId: customers[customersSelected].id,
+        assunto: assunto,
+        complemento: complemento,
+        status: status,
+        userId: user.uid,
+    })
+    .then(() => {
+        toast.success("Chamado registrado!")
+        setComplemento('')
+        setCustomersSelected(0)
+    })
+    .catch((error)=>{
+        toast.error("Ops erro ao registrar!")
+        console.log(error);
+    })
+}
     return(
         <div>
 <Header/>
@@ -25,17 +90,28 @@ export default function New(){
 </Title>
 
 <div className="container">
-    <form className="form-profile">
+    <form className="form-profile" onSubmit={handleRegister}>
         <label>Clientes</label>
-        <select>
-            <option key={1} value={1}>Mercado Bohema</option>
-            <option key={2} value={2}>SmartTechStore</option>
+        {
+            loadCustomer ? (
+                <input type='text' disabled={true} value="Carregando..."/>  
+            ) : (
+                <select value={customersSelected} onChange={handleChangeCustomer}>
+                    {customers.map((item, index)=>{
+                        return(
+                            <option key={index} value={index}>
+                                {item.nomeEmpresa}
+                            </option>
+                        )
+                    })}
+                </select> 
+            )
+            
+        }
 
-
-        </select>
 
          <label>Assuntos</label>
-        <select>
+        <select value={assunto} onChange={handleChangeSelect} >
             <option value="Suporte">Suporte</option>
             <option  value="Visita Tecnica">Visita Tecnica</option>
             <option value="Financeiro">Financeiro</option>
@@ -54,9 +130,9 @@ export default function New(){
         </div>
 
         <label>Complementos</label>
-        <textarea type="text" placeholder="Digite seu problema"/>
+        <textarea type="text" placeholder="Digite seu problema" value={complemento} onChange={(e)=> setComplemento(e.target.value)}/>
 
-        <button type="submit" value={complemento} onChange={(e)=> setComplemento(e.target.value)}>Registrar</button>         
+        <button type="submit">Registrar</button>         
         
     </form>
 </div>
